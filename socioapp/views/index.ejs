@@ -1,0 +1,73 @@
+    <%- include('partials/header') %>
+
+        <h2>Send new Post </h2>
+
+        <form method="POST"  action="posts/add" name="postForm">
+            Post Id : <input tpye="text" name="postId" value="<%= post._id %>" /></br></br>
+            Social App : <input tpye="text" name="social_app" value="<%= post.social_app %>" /></br></br>
+            Meia Type  : <input tpye="text" name="media_type" value="<%= post.media_type %>"/></br></br>
+            Posted By  : <input tpye="text" name="posted_by"  value="<%= post.posted_by %>"/></br></br>
+           
+            <% if(opr=='edit'){%>
+             <input type="Button" value="Update Post" class="btn btn-primary" onclick="update(); ">
+             <% } else {%>
+                <input type="submit" value="Send Post" class="btn btn-primary">
+             <% } %>
+        </form>
+        
+        <br/><br/>
+        Agent Name : <%= agent_name %>
+        <br/><br/>
+        
+        
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th> Post Id</th>
+                        <th>Social App</th>
+                        <th>Meia Type</th>
+                        <th>Posted By </th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% posts.forEach(function(post){ %>
+                    
+                        <tr>    
+                                <td> <%= post._id %></td>
+                                <td> <%= post.social_app %></td>
+                                <td> <%= post.media_type %></td>
+                                <td> <%= post.posted_by %></td>
+                                <td >
+                                     <a href="posts/delete/<%= post._id %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                                        &nbsp;&nbsp;&nbsp;
+                                     <a href="posts/edit/<%= post._id %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                </td>
+                        </tr>
+                    <% }) %>
+             </tbody>
+            </table>
+        </div>
+                
+
+<script>
+    function update(){
+        document.postForm.action='../../posts/update';
+        document.postForm.method='POST';
+        document.postForm.submit();
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+    <%- include('partials/footer') %>
